@@ -110,7 +110,7 @@ class OrderView(views.APIView):
     def post(self, request):
         price = request.data.get('price')
         quantity = request.data.get('quantity')
-        order_type = request.data.get('orderType')  # 'bid' or 'ask'
+        order_type = request.data.get('order_type')  # 'bid' or 'ask'
         
         # Validate input
         if not price or not quantity or not order_type:
