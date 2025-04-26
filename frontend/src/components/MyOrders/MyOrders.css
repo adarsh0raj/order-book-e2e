@@ -1,0 +1,16 @@
+.my-orders {
+  padding: 15px;
+}
+
+.my-orders .bid-row {
+  background-color: rgba(40, 167, 69, 0.05);
+}
+
+.my-orders .ask-row {
+  background-color: rgba(220, 53, 69, 0.05);
+}
+
+.my-orders .table th,
+.my-orders .table td {
+  vertical-align: middle;
+}

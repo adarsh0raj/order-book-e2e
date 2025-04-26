@@ -56,6 +56,8 @@ const TradeHistory: React.FC = () => {
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
+                <th>Buyer</th>
+                <th>Seller</th>
                 <th>Time</th>
               </tr>
             </thead>
@@ -67,6 +69,8 @@ const TradeHistory: React.FC = () => {
                     <td>{trade.price.toFixed(2)}</td>
                     <td>{trade.quantity}</td>
                     <td>{(trade.price * trade.quantity).toFixed(2)}</td>
+                    <td>{trade.bid_user}</td>
+                    <td>{trade.ask_user}</td>
                     <td>{formatDate(trade.timestamp)}</td>
                   </tr>
                 ))}

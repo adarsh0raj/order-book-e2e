@@ -13,7 +13,6 @@ DB_DIR = os.path.join(settings.BASE_DIR, 'data')
 db = FileDB(DB_DIR)
 
 
-
 class LoginView(views.APIView):
     """API endpoint for user login"""
     permission_classes = [AllowAny]
@@ -96,7 +95,6 @@ class OrderBookView(views.APIView):
     permission_classes = [IsAuthenticated]
     
     def get(self, request):
-        # Get the current order book
         order_book = db.get_order_book()
         return Response(order_book)
 
@@ -106,13 +104,10 @@ class OrderView(views.APIView):
     permission_classes = [IsAuthenticated]
     
     def get(self, request):
-        # Get user's orders - IsAuthenticated permission will ensure the user is authenticated
         orders = db.get_user_orders(request.user.id)
         return Response(orders)
     
     def post(self, request):
-        # IsAuthenticated permission will ensure the user is authenticated
-        # Extract order details from request
         price = request.data.get('price')
         quantity = request.data.get('quantity')
         order_type = request.data.get('orderType')  # 'bid' or 'ask'
@@ -137,7 +132,8 @@ class OrderView(views.APIView):
         except ValueError:
             return Response({'detail': 'Invalid price or quantity format'}, 
                             status=status.HTTP_400_BAD_REQUEST)
-          # Create the order
+        
+        # Create the order
         new_order = db.create_order(
             user_id=request.user.id, 
             username=request.user.username, 
@@ -161,6 +157,5 @@ class TradeView(views.APIView):
     permission_classes = [IsAuthenticated]
     
     def get(self, request):
-        # Get all trades
         trades = db.get_trades()
         return Response(trades)

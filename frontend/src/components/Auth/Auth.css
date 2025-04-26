@@ -3,13 +3,41 @@
   justify-content: center;
   align-items: center;
   min-height: 80vh;
+  padding: 20px;
+  background-color: #f8f9fa;
 }
 
 .auth-form-wrapper {
   width: 100%;
   max-width: 400px;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.auth-form-wrapper:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.auth-form input {
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}
+
+.auth-form input:focus {
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  border-color: #80bdff;
+}
+
+.btn-primary {
+  padding: 10px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
 }

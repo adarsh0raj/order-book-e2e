@@ -1,10 +1,12 @@
 export interface Order {
     id?: number;
     user?: string;
+    user_id?: number;
     price: number;
     quantity: number;
-    orderType: 'bid' | 'ask';
+    order_type: 'bid' | 'ask';
     timestamp?: string;
+    is_active?: boolean;
 }
 
 export interface Trade {
@@ -12,8 +14,10 @@ export interface Trade {
     price: number;
     quantity: number;
     timestamp: string;
-    bidUser?: string;
-    askUser?: string;
+    bid_user?: string;
+    ask_user?: string;
+    bid_user_id?: number;
+    ask_user_id?: number;
 }
 
 export interface User {

@@ -1,1 +1,52 @@
-[]
+[
+  {
+    "id": 1,
+    "price": 103.25,
+    "quantity": 10,
+    "timestamp": "2025-04-27T09:15:20.000Z",
+    "bid_user_id": 2,
+    "bid_user": "adarsh1",
+    "ask_user_id": 1,
+    "ask_user": "adarsh"
+  },
+  {
+    "id": 2,
+    "price": 99.75,
+    "quantity": 5,
+    "timestamp": "2025-04-25T16:40:30.000Z",
+    "bid_user_id": 1,
+    "bid_user": "adarsh",
+    "ask_user_id": 2,
+    "ask_user": "adarsh1"
+  },
+  {
+    "id": 3,
+    "price": 100.50,
+    "quantity": 8,
+    "timestamp": "2025-04-26T11:30:45.000Z",
+    "bid_user_id": 2,
+    "bid_user": "adarsh1",
+    "ask_user_id": 1,
+    "ask_user": "adarsh"
+  },
+  {
+    "id": 4,
+    "price": 101.25,
+    "quantity": 12,
+    "timestamp": "2025-04-26T14:20:15.000Z",
+    "bid_user_id": 1,
+    "bid_user": "adarsh",
+    "ask_user_id": 2,
+    "ask_user": "adarsh1"
+  },
+  {
+    "id": 5,
+    "price": 102.00,
+    "quantity": 7,
+    "timestamp": "2025-04-27T08:55:10.000Z",
+    "bid_user_id": 2,
+    "bid_user": "adarsh1",
+    "ask_user_id": 1,
+    "ask_user": "adarsh"
+  }
+]

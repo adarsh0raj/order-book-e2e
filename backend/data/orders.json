@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "id": 1,
+    "user_id": 1,
+    "user": "adarsh",
+    "price": 100.50,
+    "quantity": 10,
+    "order_type": "bid",
+    "timestamp": "2025-04-26T10:15:30.000Z",
+    "is_active": true
+  },
+  {
+    "id": 2,
+    "user_id": 1,
+    "user": "adarsh",
+    "price": 101.75,
+    "quantity": 5,
+    "order_type": "bid",
+    "timestamp": "2025-04-26T11:20:45.000Z",
+    "is_active": true
+  },
+  {
+    "id": 3,
+    "user_id": 1,
+    "user": "adarsh",
+    "price": 98.25,
+    "quantity": 15,
+    "order_type": "ask",
+    "timestamp": "2025-04-26T12:30:15.000Z",
+    "is_active": true
+  },
+  {
+    "id": 4,
+    "user_id": 2,
+    "user": "adarsh1",
+    "price": 99.00,
+    "quantity": 8,
+    "order_type": "bid",
+    "timestamp": "2025-04-26T13:45:20.000Z",
+    "is_active": true
+  },
+  {
+    "id": 5,
+    "user_id": 2,
+    "user": "adarsh1",
+    "price": 102.00,
+    "quantity": 12,
+    "order_type": "ask",
+    "timestamp": "2025-04-26T14:10:05.000Z",
+    "is_active": true
+  },
+  {
+    "id": 6,
+    "user_id": 2,
+    "user": "adarsh1",
+    "price": 101.50,
+    "quantity": 7,
+    "order_type": "ask",
+    "timestamp": "2025-04-26T15:25:30.000Z",
+    "is_active": true
+  },
+  {
+    "id": 7,
+    "user_id": 1,
+    "user": "adarsh",
+    "price": 103.25,
+    "quantity": 20,
+    "order_type": "ask",
+    "timestamp": "2025-04-27T09:05:10.000Z",
+    "is_active": false
+  },
+  {
+    "id": 8,
+    "user_id": 2,
+    "user": "adarsh1",
+    "price": 103.25,
+    "quantity": 10,
+    "order_type": "bid",
+    "timestamp": "2025-04-27T09:10:15.000Z",
+    "is_active": false
+  }
+]

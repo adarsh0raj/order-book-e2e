@@ -1,3 +1,36 @@
 .dashboard {
-  min-height: calc(100vh - 140px);
+  padding: 20px 0;
+}
+
+.dashboard .card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.dashboard .card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.dashboard .card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+}
+
+.dashboard .btn-outline-primary:hover {
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 10px;
+  }
+  
+  .dashboard .card {
+    margin-bottom: 15px;
+  }
 }

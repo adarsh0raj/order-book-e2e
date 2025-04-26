@@ -3,7 +3,6 @@ import { Order, Trade, AuthResponse, OrderBook } from '../types/types';
 
 export const API_URL = 'http://localhost:8000/api';
 
-// Function to set the JWT token in the request headers
 const setAuthToken = (token: string) => {
   if (token) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -12,13 +11,14 @@ const setAuthToken = (token: string) => {
   }
 };
 
-// Initialize token from localStorage if it exists
+// Get token from localStorage if it exists
 const token = localStorage.getItem('token');
+
 if (token) {
   setAuthToken(token);
 }
 
-// Auth services
+// Login Service - API Call
 export const login = async (username: string, password: string): Promise<AuthResponse> => {
   try {
     const response = await axios.post(`${API_URL}/auth/login/`, { username, password });
@@ -30,28 +30,31 @@ export const login = async (username: string, password: string): Promise<AuthRes
     
     return { token, user };
   } catch (error) {
-    console.error('Login error:', error);
+    console.error('Login error: ', error);
     throw error;
   }
 };
 
+// Registration Service - API Call
 export const register = async (username: string, password: string): Promise<AuthResponse> => {
   try {
     const response = await axios.post(`${API_URL}/auth/register/`, { username, password });
     const { token, user } = response.data;
     
-    // Save token to localStorage
-    localStorage.setItem('token', token);
-    setAuthToken(token);
+    if (token) {
+      // Save token to localStorage
+      localStorage.setItem('token', token);
+      setAuthToken(token);
+    }
     
     return { token, user };
   } catch (error) {
-    console.error('Registration error:', error);
+    console.error('Registration error: ', error);
     throw error;
   }
 };
 
-// Order services
+// Order Service - Get Entire Order Book - API Call
 export const getOrderBook = async (): Promise<OrderBook> => {
   try {
     const response = await axios.get(`${API_URL}/orderbook/`);
@@ -62,16 +65,27 @@ export const getOrderBook = async (): Promise<OrderBook> => {
   }
 };
 
+// Order Service - Place Order - API Call
 export const placeOrder = async (order: Order): Promise<Order> => {
   try {
     const response = await axios.post(`${API_URL}/orders/`, {
       price: order.price,
       quantity: order.quantity,
-      orderType: order.orderType
+      order_type: order.order_type,
     });
     return response.data.order;
   } catch (error) {
     console.error('Error placing order:', error);
+    throw error;
+  }
+};
+
+export const getUserOrders = async (): Promise<Order[]> => {
+  try {
+    const response = await axios.get(`${API_URL}/orders/`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user orders:', error);
     throw error;
   }
 };

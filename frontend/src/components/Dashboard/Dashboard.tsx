@@ -2,6 +2,7 @@ import React from 'react';
 import OrderBook from '../OrderBook/OrderBook';
 import OrderForm from '../OrderForm/OrderForm';
 import TradeHistory from '../TradeHistory/TradeHistory';
+import MyOrders from '../MyOrders/MyOrders';
 import './Dashboard.css';
 
 const Dashboard: React.FC = () => {
@@ -23,6 +24,17 @@ const Dashboard: React.FC = () => {
             <div className="card mb-4">
               <div className="card-body">
                 <OrderForm />
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Trade History */}        {/* My Orders */}
+        <div className="row">
+          <div className="col-12">
+            <div className="card mb-4">
+              <div className="card-body">
+                <MyOrders />
               </div>
             </div>
           </div>

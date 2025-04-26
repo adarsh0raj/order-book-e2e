@@ -7,12 +7,23 @@ const OrderBook: React.FC = () => {
   const [orderBook, setOrderBook] = useState<OrderBookType>({ bids: [], asks: [] });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [spread, setSpread] = useState<number | null>(null);
 
   const fetchOrderBook = async () => {
     try {
       setLoading(true);
       const data = await getOrderBook();
       setOrderBook(data);
+      
+      // Calculate the spread (difference between lowest ask and highest bid)
+      if (data.asks.length > 0 && data.bids.length > 0) {
+        const lowestAsk = Math.min(...data.asks.map(ask => ask.price));
+        const highestBid = Math.max(...data.bids.map(bid => bid.price));
+        setSpread(lowestAsk - highestBid);
+      } else {
+        setSpread(null);
+      }
+      
       setError(null);
     } catch (err) {
       setError('Failed to load order book');
@@ -42,6 +53,15 @@ const OrderBook: React.FC = () => {
   return (
     <div className="order-book">
       <h2 className="text-center mb-4">Order Book</h2>
+      
+      {spread !== null && (
+        <div className="text-center mb-3">
+          <span className="badge bg-info px-3 py-2">
+            Spread: {spread.toFixed(2)} ({(spread / Math.min(...orderBook.asks.map(ask => ask.price)) * 100).toFixed(2)}%)
+          </span>
+        </div>
+      )}
+      
       <div className="row">
         <div className="col-md-6">
           <h4 className="text-success">Bids (Buy Orders)</h4>

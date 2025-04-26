@@ -31,7 +31,7 @@ const OrderForm: React.FC = () => {
       const order = {
         price: parseFloat(price),
         quantity: parseFloat(quantity),
-        orderType
+        order_type: orderType,
       };
       
       await placeOrder(order);
