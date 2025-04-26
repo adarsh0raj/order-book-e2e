@@ -1,0 +1,11 @@
+.order-book {
+  padding: 10px;
+}
+
+.bid-row td:first-child {
+  font-weight: bold;
+}
+
+.ask-row td:first-child {
+  font-weight: bold;
+}
