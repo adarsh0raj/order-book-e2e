@@ -23,10 +23,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Third party apps
     'rest_framework',
     'corsheaders',
-    # Local apps
     'api',
 ]
 
@@ -39,7 +37,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'api.middleware.get_auth_middleware',
 ]
 
 ROOT_URLCONF = 'order_book_project.urls'
@@ -63,12 +60,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'order_book_project.wsgi.application'
 
 # Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = {}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

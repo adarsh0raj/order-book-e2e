@@ -1,13 +1,10 @@
 from django.urls import path
-from .views import (
-    OrderView, OrderBookView, TradeView, 
-    RegisterView, LoginView
-)
+from . import views
 
 urlpatterns = [
-    path('orders/', OrderView.as_view(), name='orders'),
-    path('orderbook/', OrderBookView.as_view(), name='orderbook'),
-    path('trades/', TradeView.as_view(), name='trades'),
-    path('auth/register/', RegisterView.as_view(), name='register'),
-    path('auth/login/', LoginView.as_view(), name='login'),
+    path('orders/', views.OrderView.as_view(), name='orders'),
+    path('orderbook/', views.OrderBookView.as_view(), name='orderbook'),
+    path('trades/', views.TradeView.as_view(), name='trades'),
+    path('auth/register/', views.RegisterView.as_view(), name='register'),
+    path('auth/login/', views.LoginView.as_view(), name='login'),
 ]
