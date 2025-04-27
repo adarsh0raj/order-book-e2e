@@ -8,11 +8,21 @@ import './Dashboard.css';
 const Dashboard: React.FC = () => {
   return (
     <div className="dashboard">
-      <div className="container-fluid">
+      <div className="container">
+        <div className="dashboard-header mb-4">
+          <h2 className="text-primary-custom mb-1">
+            <i className="bi bi-graph-up me-2"></i>Trading Dashboard
+          </h2>
+          <p className="text-secondary-custom">Market overview and trading tools</p>
+        </div>
+        
         <div className="row">
           {/* Order Book */}
-          <div className="col-md-8">
+          <div className="col-lg-8">
             <div className="card mb-4">
+              <div className="card-header">
+                <i className="bi bi-book me-2"></i>Order Book
+              </div>
               <div className="card-body">
                 <OrderBook />
               </div>
@@ -20,8 +30,11 @@ const Dashboard: React.FC = () => {
           </div>
           
           {/* Order Form */}
-          <div className="col-md-4">
+          <div className="col-lg-4">
             <div className="card mb-4">
+              <div className="card-header">
+                <i className="bi bi-file-earmark-plus me-2"></i>New Order
+              </div>
               <div className="card-body">
                 <OrderForm />
               </div>
@@ -30,9 +43,12 @@ const Dashboard: React.FC = () => {
         </div>
         
         {/* My Orders */}
-        <div className="row">
+        <div className="row" id="myorders">
           <div className="col-12">
             <div className="card mb-4">
+              <div className="card-header">
+                <i className="bi bi-list-check me-2"></i>My Orders
+              </div>
               <div className="card-body">
                 <MyOrders />
               </div>
@@ -41,9 +57,12 @@ const Dashboard: React.FC = () => {
         </div>
         
         {/* Trade History */}
-        <div className="row">
+        <div className="row" id="trades">
           <div className="col-12">
             <div className="card mb-4">
+              <div className="card-header">
+                <i className="bi bi-clock-history me-2"></i>Trade History
+              </div>
               <div className="card-body">
                 <TradeHistory />
               </div>

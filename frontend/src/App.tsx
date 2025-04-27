@@ -56,15 +56,15 @@ const App: React.FC = () => {
                     <a className="nav-link active" href="/">Dashboard</a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="/orders">My Orders</a>
+                    <a className="nav-link" href="#myorders">My Orders</a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="/trades">Trade History</a>
+                    <a className="nav-link" href="#trades">Trade History</a>
                   </li>
                 </ul>
               )}
               
-              {isAuthenticated ? (
+              {isAuthenticated && (
                 <div className="d-flex align-items-center">
                   <span className="text-light me-3 d-none d-md-block">
                     <i className="bi bi-person-circle me-1"></i> 
@@ -77,19 +77,13 @@ const App: React.FC = () => {
                     <i className="bi bi-box-arrow-right me-1"></i> Logout
                   </button>
                 </div>
-              ) : (
-                <div className="ms-auto">
-                  <button className="navbar-button">
-                    <i className="bi bi-box-arrow-in-right me-1"></i> Sign In
-                  </button>
-                </div>
               )}
             </div>
           </div>
         </nav>
         
         {/* Main Content */}
-        <main className="main-content py-4">
+        <main className="main-content">
           <Routes>
             <Route 
               path="/" 
@@ -110,16 +104,18 @@ const App: React.FC = () => {
           <div className="container">
             <div className="row align-items-center">
               <div className="col-md-4 text-md-start mb-3 mb-md-0">
-                <h5 className="mb-0">Order Book App</h5>
+                <h5 className="mb-0">
+                  <i className="bi bi-bar-chart-fill me-2"></i>
+                  Order Book App
+                </h5>
               </div>
               <div className="col-md-4 mb-3 mb-md-0">
-                <span>&copy; 2025 All Rights Reserved</span>
+                <span>&copy; 2025</span>
               </div>
               <div className="col-md-4 text-md-end">
                 <div className="social-links">
-                  <a href="#" className="me-3"><i className="bi bi-github"></i></a>
-                  <a href="#" className="me-3"><i className="bi bi-twitter"></i></a>
-                  <a href="#"><i className="bi bi-linkedin"></i></a>
+                  <a href="https://github.com/adarsh0raj" target="_blank" className="me-3" aria-label="Github"><i className="bi bi-github"></i></a>
+                  <a href="https://www.linkedin.com/in/adarsh0raj/" target="_blank" aria-label="LinkedIn"><i className="bi bi-linkedin"></i></a>
                 </div>
               </div>
             </div>

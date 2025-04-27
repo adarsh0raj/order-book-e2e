@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { login, register } from '../../services/api';
 import './Auth.css';
+import { Form, Button, Alert } from 'react-bootstrap';
 
 interface AuthProps {
   onLogin: () => void;
@@ -71,7 +72,6 @@ const Auth: React.FC<AuthProps> = ({ onLogin }) => {
         await login(username, password);
       } else {
         await register(username, password);
-        // After registration, login automatically
       }
       
       onLogin();
@@ -81,100 +81,142 @@ const Auth: React.FC<AuthProps> = ({ onLogin }) => {
     } finally {
       setLoading(false);
     }
-  };
-  return (
-    <div className="auth-container">      <div className="auth-form-wrapper">
-        <h2 className="text-center mb-4">{isLogin ? 'Login' : 'Register'}</h2>
+  };  return (
+    <div className="auth-container">
+      <div className="auth-form-wrapper">
+        <h2 className="text-center">{isLogin ? 'Welcome Back' : 'Create Account'}</h2>
         
         {!isLogin && (
-          <div className="alert alert-info mb-4">
-            <p className="mb-0">
-              <i className="bi bi-info-circle-fill me-2"></i> 
-              Create a new account to start trading
-            </p>
-          </div>
+          <Alert variant="info" className="mb-4 d-flex align-items-center">
+            <i className="bi bi-info-circle-fill me-2 fs-5"></i> 
+            <span>Create a new account to start trading</span>
+          </Alert>
         )}
         
-        {error && <div className="alert alert-danger">{error}</div>}
+        {error && (
+          <Alert variant="danger" className="mb-4 d-flex align-items-center">
+            <i className="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
+            <span>{error}</span>
+          </Alert>
+        )}
         
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
-            <input 
-              type="text" 
-              className="form-control" 
-              id="username" 
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
-              required
-            />
-          </div>
-            <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <input 
-              type="password" 
-              className="form-control" 
-              id="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
-            />
+        <Form onSubmit={handleSubmit} className="auth-form">
+          <Form.Group className="mb-4" controlId="username">
+            <Form.Label>Username</Form.Label>
+            <div className="input-group">
+              <span className="input-group-text bg-transparent border-end-0">
+                <i className="bi bi-person"></i>
+              </span>              <Form.Control
+                type="text"
+                value={username}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+                placeholder="Enter your username"
+                className="border-start-0"
+                required
+              />
+            </div>
+          </Form.Group>
+          
+          <Form.Group className="mb-4" controlId="password">
+            <Form.Label>Password</Form.Label>
+            <div className="input-group">
+              <span className="input-group-text bg-transparent border-end-0">
+                <i className="bi bi-lock"></i>
+              </span>              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                className="border-start-0"
+                required
+              />
+            </div>
             {!isLogin && password && (
-              <div className="mt-1 small">
-                <span>Password strength: </span>
-                <span className={getPasswordStrength().color}>
+              <div className="mt-2 d-flex align-items-center">
+                <div className="progress flex-grow-1" style={{ height: '6px' }}>
+                  <div 
+                    className={`progress-bar bg-${
+                      getPasswordStrength().strength === 'Strong' ? 'success' : 
+                      getPasswordStrength().strength === 'Good' ? 'primary' : 
+                      getPasswordStrength().strength === 'Moderate' ? 'warning' : 'danger'
+                    }`} 
+                    style={{ 
+                      width: `${
+                        getPasswordStrength().strength === 'Strong' ? '100%' : 
+                        getPasswordStrength().strength === 'Good' ? '75%' : 
+                        getPasswordStrength().strength === 'Moderate' ? '50%' : '25%'
+                      }` 
+                    }}
+                  />
+                </div>
+                <span className={`ms-2 small ${getPasswordStrength().color}`}>
                   {getPasswordStrength().strength}
                 </span>
               </div>
             )}
-          </div>
+          </Form.Group>
           
           {!isLogin && (
-            <div className="mb-3">
-              <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-              <input 
-                type="password" 
-                className={`form-control ${confirmPassword && !passwordsMatch ? 'is-invalid' : ''}`}
-                id="confirmPassword" 
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm your password"
-                required
-              />
-              {confirmPassword && !passwordsMatch && (
-                <div className="invalid-feedback">
-                  Passwords do not match
-                </div>
-              )}
-            </div>
+            <Form.Group className="mb-4" controlId="confirmPassword">
+              <Form.Label>Confirm Password</Form.Label>
+              <div className="input-group">
+                <span className="input-group-text bg-transparent border-end-0">
+                  <i className="bi bi-shield-lock"></i>
+                </span>                <Form.Control
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm your password"
+                  className={`border-start-0 ${confirmPassword && !passwordsMatch ? 'is-invalid' : ''}`}
+                  required
+                />
+                {confirmPassword && !passwordsMatch && (
+                  <div className="invalid-feedback">
+                    Passwords do not match
+                  </div>
+                )}
+              </div>
+            </Form.Group>
           )}
           
-          <button 
+          <Button 
             type="submit" 
-            className="btn btn-primary w-100"
+            className="btn btn-primary w-100 py-3 mt-3"
             disabled={loading || (!isLogin && !passwordsMatch)}
           >
-            {loading ? 'Processing...' : isLogin ? 'Login' : 'Register'}
-          </button>
-        </form>
-          <div className="mt-3 text-center">
-          <button 
-            type="button"
-            className="btn btn-link text-decoration-none"
+            {loading ? (
+              <>
+                <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Processing...
+              </>
+            ) : (
+              <>
+                <i className={`bi ${isLogin ? 'bi-box-arrow-in-right' : 'bi-person-plus'} me-2`}></i>
+                {isLogin ? 'Sign In' : 'Create Account'}
+              </>
+            )}
+          </Button>
+        </Form>
+        
+        <div className="mt-4 text-center">
+          <Button 
+            variant="link"
+            className="text-decoration-none"
             onClick={() => setIsLogin(!isLogin)}
           >
             {isLogin ? 'Need an account? Register' : 'Already have an account? Login'}
-          </button>
+          </Button>
         </div>
         
         {!isLogin && (
-          <div className="mt-3 small text-muted">
-            <p className="mb-0"><i className="bi bi-info-circle me-1"></i> Password requirements:</p>
-            <ul className="ps-3">
-              <li>At least 8 characters long</li>
-              <li>Contains letters and numbers</li>
+          <div className="mt-4 small text-muted">
+            <p className="mb-2">
+              <i className="bi bi-shield-check me-2"></i>
+              <strong>Password requirements:</strong>
+            </p>
+            <ul className="ps-4 mb-0">
+              <li className="mb-1">At least 8 characters long</li>
+              <li>Contains both letters and numbers</li>
             </ul>
           </div>
         )}

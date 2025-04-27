@@ -1,16 +1,124 @@
+:root {
+  --cream: #FBE4D6;
+  --blue-primary: #261FB3;
+  --blue-secondary: #161179;
+  --blue-dark: #0C0950;
+}
+
 .my-orders {
   padding: 15px;
 }
 
+.empty-state {
+  padding: 10px 0;
+}
+
+.empty-state i {
+  font-size: 4rem;
+  color: rgba(22, 17, 121, 0.2);
+}
+
+.orders-table {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.orders-table thead th {
+  background-color: rgba(38, 31, 179, 0.05);
+  color: var(--blue-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  padding: 12px 15px;
+  border-top: none;
+  border-bottom: 2px solid rgba(38, 31, 179, 0.1);
+}
+
+.orders-table td {
+  padding: 12px 15px;
+  vertical-align: middle;
+}
+
 .my-orders .bid-row {
-  background-color: rgba(40, 167, 69, 0.05);
+  background-color: rgba(40, 167, 69, 0.03);
+  border-left: 2px solid rgba(40, 167, 69, 0.3);
 }
 
 .my-orders .ask-row {
-  background-color: rgba(220, 53, 69, 0.05);
+  background-color: rgba(220, 53, 69, 0.03);
+  border-left: 2px solid rgba(220, 53, 69, 0.3);
 }
 
-.my-orders .table th,
-.my-orders .table td {
-  vertical-align: middle;
+.my-orders .table tr:hover {
+  background-color: rgba(251, 228, 214, 0.2);
+}
+
+.order-type-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.order-type-badge.buy {
+  background-color: rgba(40, 167, 69, 0.15);
+  color: #28a745;
+}
+
+.order-type-badge.sell {
+  background-color: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 8px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-badge.active {
+  background-color: rgba(40, 167, 69, 0.15);
+  color: #28a745;
+}
+
+.status-badge.completed {
+  background-color: rgba(108, 117, 125, 0.15);
+  color: #6c757d;
+}
+
+.status-badge i {
+  font-size: 0.6rem;
+}
+
+.orders-stats .badge {
+  padding: 8px 12px;
+  margin-right: 8px;
+  font-weight: 500;
+}
+
+.orders-header {
+  padding-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+  .orders-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  
+  .orders-actions {
+    margin-top: 10px;
+  }
+  
+  .orders-stats .badge {
+    margin-bottom: 5px;
+  }
 }

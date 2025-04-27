@@ -39,54 +39,96 @@ const TradeHistory: React.FC = () => {
   if (loading && !trades.length) {
     return <div className="text-center my-3">Loading trade history...</div>;
   }
-
   return (
     <div className="trade-history">
-      <h2 className="text-center mb-4">Trade History</h2>
       
-      {error && <div className="alert alert-danger">{error}</div>}
-      
-      {trades.length === 0 ? (
-        <div className="text-center text-muted">No trades executed yet</div>
-      ) : (
-        <div className="table-responsive">
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>Buyer</th>
-                <th>Seller</th>
-                <th>Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              {trades
-                .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) // Sort by timestamp (newest first)
-                .map((trade, index) => (
-                  <tr key={index}>
-                    <td>{trade.price.toFixed(2)}</td>
-                    <td>{trade.quantity}</td>
-                    <td>{(trade.price * trade.quantity).toFixed(2)}</td>
-                    <td>{trade.bid_user}</td>
-                    <td>{trade.ask_user}</td>
-                    <td>{formatDate(trade.timestamp)}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+      {error && (
+        <div className="alert alert-danger d-flex align-items-center">
+          <i className="bi bi-exclamation-triangle-fill me-2"></i>
+          <span>{error}</span>
         </div>
       )}
       
-      <div className="text-center mt-3">
-        <button 
-          className="btn btn-outline-primary"
-          onClick={fetchTrades}
-        >
-          Refresh Trade History
-        </button>
-      </div>
+      {loading && !trades.length ? (
+        <div className="text-center my-4 py-4">
+          <div className="spinner-border text-primary-custom" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <p className="mt-2">Loading trade history...</p>
+        </div>
+      ) : trades.length === 0 ? (
+        <div className="empty-state text-center py-4">
+          <i className="bi bi-bar-chart fs-1 text-secondary-custom"></i>
+          <p className="mt-3 text-muted">No trades have been executed yet</p>
+          <p className="text-muted small">Completed trades will appear here</p>
+        </div>
+      ) : (
+        <div className="trades-container">
+          <div className="trades-header mb-4 d-flex justify-content-between align-items-center">
+            <div className="trades-stats">
+              <span className="badge bg-accent text-secondary-custom me-2 px-3 py-2">
+                <i className="bi bi-activity me-1"></i>
+                Total Trades: {trades.length}
+              </span>
+              <span className="badge bg-light text-primary-custom me-2 px-3 py-2">
+                <i className="bi bi-cash-coin me-1"></i>
+                Volume: ₹{trades.reduce((sum, trade) => sum + (trade.price * trade.quantity), 0).toFixed(2)}
+              </span>
+            </div>
+            <div className="trades-actions">
+              <button 
+                className="btn btn-sm btn-outline-primary"
+                onClick={fetchTrades}
+                title="Refresh Trade History"
+              >
+                <i className="bi bi-arrow-repeat me-1"></i> Refresh
+              </button>
+            </div>
+          </div>
+          
+          <div className="table-responsive trades-table">
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total Value</th>
+                  <th>Buyer</th>
+                  <th>Seller</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {trades
+                  .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) // Sort by timestamp (newest first)
+                  .map((trade, index) => (
+                    <tr key={index} className="trade-row">
+                      <td className="fw-semibold">₹{trade.price.toFixed(2)}</td>
+                      <td>{trade.quantity}</td>
+                      <td className="fw-semibold">₹{(trade.price * trade.quantity).toFixed(2)}</td>
+                      <td>
+                        <span className="user-badge buyer">
+                          <i className="bi bi-person-fill me-1"></i>
+                          {trade.bid_user}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="user-badge seller">
+                          <i className="bi bi-person-fill me-1"></i>
+                          {trade.ask_user}
+                        </span>
+                      </td>
+                      <td className="text-muted">
+                        <i className="bi bi-calendar-event me-1"></i>
+                        {formatDate(trade.timestamp)}
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -128,5 +128,35 @@
     "order_type": "bid",
     "timestamp": "2025-04-28T01:27:28.785689",
     "is_active": false
+  },
+  {
+    "id": 14,
+    "user_id": 1,
+    "user": "adarsh",
+    "price": 103.0,
+    "quantity": 20,
+    "order_type": "ask",
+    "timestamp": "2025-04-28T01:57:11.093036",
+    "is_active": true
+  },
+  {
+    "id": 15,
+    "user_id": 1,
+    "user": "adarsh",
+    "price": 102.5,
+    "quantity": 15,
+    "order_type": "ask",
+    "timestamp": "2025-04-28T01:57:19.107066",
+    "is_active": true
+  },
+  {
+    "id": 16,
+    "user_id": 3,
+    "user": "adarsh3",
+    "price": 104.0,
+    "quantity": 10,
+    "order_type": "ask",
+    "timestamp": "2025-04-28T02:04:39.259600",
+    "is_active": true
   }
 ]

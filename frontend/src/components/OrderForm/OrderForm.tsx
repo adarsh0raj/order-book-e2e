@@ -54,94 +54,127 @@ const OrderForm: React.FC = () => {
       setLoading(false);
     }
   };
-
   return (
     <div className="order-form-container">
-      <h2 className="text-center mb-4">Place New Order</h2>
       
-      {error && <div className="alert alert-danger">{error}</div>}
-      {success && <div className="alert alert-success">{success}</div>}
+      {error && (
+        <div className="alert alert-danger d-flex align-items-center">
+          <i className="bi bi-exclamation-triangle-fill me-2"></i>
+          <span>{error}</span>
+        </div>
+      )}
+      
+      {success && (
+        <div className="alert alert-success d-flex align-items-center">
+          <i className="bi bi-check-circle-fill me-2"></i>
+          <span>{success}</span>
+        </div>
+      )}
       
       <form onSubmit={handleSubmit} className="order-form">
-        <div className="mb-3">
-          <label className="form-label">Token</label>
-          <input 
-            type="text" 
-            className="form-control" 
-            value="RELIANCE" 
-            disabled 
-            title="Currently only supporting RELIANCE token"
-          />
-        </div>
-        
-        <div className="mb-3">
-          <label className="form-label">Order Type</label>
-          <div className="d-flex">
-            <div className="form-check me-4">
-              <input 
-                className="form-check-input" 
-                type="radio" 
-                name="orderType" 
-                id="bidOrder"
-                checked={orderType === 'bid'}
-                onChange={() => setOrderType('bid')}
-              />
-              <label className="form-check-label text-success" htmlFor="bidOrder">
-                Buy (Bid)
-              </label>
+        <div className="token-selector mb-4">
+          <div className="d-flex align-items-center">
+            <div className="token-icon">
+              <i className="bi bi-currency-exchange"></i>
             </div>
-            <div className="form-check">
-              <input 
-                className="form-check-input" 
-                type="radio" 
-                name="orderType" 
-                id="askOrder"
-                checked={orderType === 'ask'}
-                onChange={() => setOrderType('ask')}
-              />
-              <label className="form-check-label text-danger" htmlFor="askOrder">
-                Sell (Ask)
-              </label>
+            <div className="token-info">
+              <h5 className="mb-0">RELIANCE</h5>
+              <small className="text-secondary-custom">Reliance Industries</small>
             </div>
           </div>
         </div>
         
-        <div className="mb-3">
-          <label htmlFor="price" className="form-label">Price</label>
-          <input 
-            type="number"
-            step="0.01" 
-            className="form-control" 
-            id="price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            placeholder="Enter price"
-            min="0.01"
-            required
-          />
+        <div className="order-type-selector mb-4">
+          <label className="form-label fw-semibold mb-2">Order Type</label>
+          <div className="d-flex order-type-buttons">
+            <button 
+              type="button"
+              className={`order-type-btn ${orderType === 'bid' ? 'active buy' : ''}`}
+              onClick={() => setOrderType('bid')}
+            >
+              <i className="bi bi-graph-up-arrow me-2"></i>
+              Buy (Bid)
+            </button>
+            <button 
+              type="button"
+              className={`order-type-btn ${orderType === 'ask' ? 'active sell' : ''}`}
+              onClick={() => setOrderType('ask')}
+            >
+              <i className="bi bi-graph-down-arrow me-2"></i>
+              Sell (Ask)
+            </button>
+          </div>
         </div>
         
-        <div className="mb-3">
-          <label htmlFor="quantity" className="form-label">Quantity</label>
-          <input 
-            type="number" 
-            step="1"
-            className="form-control" 
-            id="quantity"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            placeholder="Enter quantity"
-            min="1"
-            required
-          />
+        <div className="mb-4">
+          <label htmlFor="price" className="form-label fw-semibold">Price</label>
+          <div className="input-group">
+            <span className="input-group-text">₹</span>
+            <input 
+              type="number"
+              step="0.01" 
+              className="form-control" 
+              id="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              placeholder="Enter price"
+              min="0.01"
+              required
+            />
+          </div>
+          <small className="form-text text-muted">
+            Enter the price per unit
+          </small>
+        </div>
+        
+        <div className="mb-4">
+          <label htmlFor="quantity" className="form-label fw-semibold">Quantity</label>
+          <div className="input-group">
+            <span className="input-group-text">
+              <i className="bi bi-hash"></i>
+            </span>
+            <input 
+              type="number" 
+              step="1"
+              className="form-control" 
+              id="quantity"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              placeholder="Enter quantity"
+              min="1"
+              required
+            />
+          </div>
+          <small className="form-text text-muted">
+            Number of units to {orderType === 'bid' ? 'buy' : 'sell'}
+          </small>
+        </div>
+        
+        <div className="total-section p-3 mb-4">
+          <div className="d-flex justify-content-between">
+            <span>Total Value:</span>
+            <span className="fw-bold">
+              {price && quantity ? `₹${(parseFloat(price) * parseFloat(quantity)).toFixed(2)}` : '₹0.00'}
+            </span>
+          </div>
         </div>
         
         <button 
           type="submit" 
-          className={`btn btn-${orderType === 'bid' ? 'success' : 'danger'} w-100`}
+          className={`btn ${orderType === 'bid' ? 'btn-buy' : 'btn-sell'} w-100 py-3`}
           disabled={loading}
         >
-          {loading ? 'Placing Order...' : `Place ${orderType === 'bid' ? 'Buy' : 'Sell'} Order`}
+          {loading ? (
+            <>
+              <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              <span>Processing...</span>
+            </>
+          ) : (
+            <>
+              <i className={`bi ${orderType === 'bid' ? 'bi-cart-plus' : 'bi-cart-dash'} me-2`}></i>
+              <span>{`Place ${orderType === 'bid' ? 'Buy' : 'Sell'} Order`}</span>
+            </>
+          )}
         </button>
       </form>
     </div>

@@ -1,36 +1,151 @@
+:root {
+  --cream: #FBE4D6;
+  --blue-primary: #261FB3;
+  --blue-secondary: #161179;
+  --blue-dark: #0C0950;
+}
+
 .dashboard {
-  padding: 20px 0;
+  padding: 30px 0;
+  background-color: #f8f9fa;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-header {
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.dashboard-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: var(--cream);
+  border-radius: 2px;
+}
+
+.dashboard-header h2 {
+  font-weight: 700;
+  color: var(--blue-secondary);
+}
+
+.dashboard-header p {
+  color: var(--blue-dark);
+  opacity: 0.8;
 }
 
 .dashboard .card {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   border: none;
-  border-radius: 8px;
-  transition: all 0.2s ease;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .dashboard .card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
 }
 
 .dashboard .card-header {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: linear-gradient(135deg, var(--blue-primary), var(--blue-secondary));
+  color: white;
   font-weight: 600;
+  padding: 1rem 1.25rem;
+  border-bottom: none;
+}
+
+.dashboard .card-body {
+  padding: 1.5rem;
+}
+
+.dashboard .btn-primary {
+  background-color: var(--blue-primary);
+  border-color: var(--blue-primary);
+  box-shadow: 0 4px 6px rgba(38, 31, 179, 0.2);
+}
+
+.dashboard .btn-primary:hover {
+  background-color: var(--blue-secondary);
+  border-color: var(--blue-secondary);
+  box-shadow: 0 5px 8px rgba(38, 31, 179, 0.3);
+  transform: translateY(-2px);
+}
+
+.dashboard .btn-outline-primary {
+  color: var(--blue-primary);
+  border-color: var(--blue-primary);
 }
 
 .dashboard .btn-outline-primary:hover {
-  transform: translateY(-1px);
+  background-color: var(--blue-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Table styling */
+.dashboard table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dashboard table thead th {
+  background-color: rgba(38, 31, 179, 0.05);
+  color: var(--blue-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid rgba(38, 31, 179, 0.1);
+}
+
+.dashboard table tbody tr:hover {
+  background-color: rgba(251, 228, 214, 0.2);
+}
+
+.dashboard .badge {
+  padding: 0.5em 0.75em;
+  font-weight: 500;
+}
+
+.dashboard .badge-buy {
+  background-color: #219653;
+  color: white;
+}
+
+.dashboard .badge-sell {
+  background-color: #EB5757;
+  color: white;
 }
 
 /* Responsive adjustments */
+@media (max-width: 992px) {
+  .dashboard {
+    padding: 15px 0;
+  }
+}
+
 @media (max-width: 768px) {
   .dashboard {
     padding: 10px;
   }
   
   .dashboard .card {
+    margin-bottom: 15px;
+  }
+  
+  .dashboard-header {
+    padding-bottom: 10px;
     margin-bottom: 15px;
   }
 }
