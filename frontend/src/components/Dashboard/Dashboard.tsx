@@ -29,7 +29,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
         
-        {/* Trade History */}        {/* My Orders */}
+        {/* My Orders */}
         <div className="row">
           <div className="col-12">
             <div className="card mb-4">
