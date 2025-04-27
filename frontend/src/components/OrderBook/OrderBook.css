@@ -47,6 +47,24 @@
 
 .order-table {
   margin-bottom: 0;
+  table-layout: fixed; /* Force equal column widths */
+  width: 100%;
+}
+
+/* Set each column width */
+.order-table th:nth-child(1),
+.order-table td:nth-child(1) {
+  width: 33.33%;
+}
+
+.order-table th:nth-child(2),
+.order-table td:nth-child(2) {
+  width: 33.33%;
+}
+
+.order-table th:nth-child(3),
+.order-table td:nth-child(3) {
+  width: 33.33%;
 }
 
 .order-table th {
@@ -59,6 +77,14 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-align: left;
+  padding: 12px 15px;
+}
+
+.order-table td {
+  text-align: left;
+  padding: 12px 15px;
+  vertical-align: middle;
 }
 
 .order-table tbody tr:hover {
@@ -79,7 +105,8 @@
   position: relative;
 }
 
-.bid-row::before {
+/* Fixed the pseudo-elements to not create empty space */
+.bid-row::after {
   content: '';
   position: absolute;
   top: 0;
@@ -88,9 +115,10 @@
   width: calc(var(--fill-percentage, 0) * 100%);
   background-color: rgba(40, 167, 69, 0.1);
   z-index: -1;
+  pointer-events: none; /* Ensures the pseudo-element doesn't interfere with clicks */
 }
 
-.ask-row::before {
+.ask-row::after {
   content: '';
   position: absolute;
   top: 0;
@@ -99,6 +127,7 @@
   width: calc(var(--fill-percentage, 0) * 100%);
   background-color: rgba(220, 53, 69, 0.1);
   z-index: -1;
+  pointer-events: none; /* Ensures the pseudo-element doesn't interfere with clicks */
 }
 
 @media (max-width: 767px) {

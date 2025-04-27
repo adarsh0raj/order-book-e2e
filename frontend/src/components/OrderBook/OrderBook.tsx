@@ -98,11 +98,12 @@ const OrderBook: React.FC = () => {
                       ) : (
                         orderBook.bids
                           .sort((a, b) => b.price - a.price) // Sort bids in descending order by price
-                          .map((bid, index) => (
-                            <tr key={index} className="bid-row">
-                              <td className="fw-semibold"><span className="text-success"><i className="bi bi-caret-up-fill me-1"></i>{bid.price.toFixed(2)}</span></td>
+                          .map((bid, index) => (                            <tr key={index} className="bid-row">
+                              <td className="text-success fw-semibold">
+                                <i className="bi bi-caret-up-fill me-1"></i>₹{bid.price.toFixed(2)}
+                              </td>
                               <td>{bid.quantity}</td>
-                              <td className="fw-semibold">{(bid.price * bid.quantity).toFixed(2)}</td>
+                              <td className="fw-semibold">₹{(bid.price * bid.quantity).toFixed(2)}</td>
                             </tr>
                           ))
                       )}
@@ -138,11 +139,12 @@ const OrderBook: React.FC = () => {
                       ) : (
                         orderBook.asks
                           .sort((a, b) => a.price - b.price) // Sort asks in ascending order by price
-                          .map((ask, index) => (
-                            <tr key={index} className="ask-row">
-                              <td className="fw-semibold"><span className="text-danger"><i className="bi bi-caret-down-fill me-1"></i>{ask.price.toFixed(2)}</span></td>
+                          .map((ask, index) => (                            <tr key={index} className="ask-row">
+                              <td className="text-danger fw-semibold">
+                                <i className="bi bi-caret-down-fill me-1"></i>₹{ask.price.toFixed(2)}
+                              </td>
                               <td>{ask.quantity}</td>
-                              <td className="fw-semibold">{(ask.price * ask.quantity).toFixed(2)}</td>
+                              <td className="fw-semibold">₹{(ask.price * ask.quantity).toFixed(2)}</td>
                             </tr>
                           ))
                       )}
