@@ -57,6 +57,20 @@ A simple yet powerful order book application for trading, built with a React fro
    ```
    The frontend application will be available at `http://localhost:3000/`
 
+## Screenshots:
+
+1. Login/Register Page (Auth):
+![Auth](./images/4.png)
+
+2. OrderBook and Order placement Dashbaord
+![Dashboard](./images/1.png)
+
+3. My orders
+![My Orders](./images/2.png)
+
+4. Trade History
+![Trades](./images/3.png)
+
 ## API Endpoints
 
 - **Authentication**:
