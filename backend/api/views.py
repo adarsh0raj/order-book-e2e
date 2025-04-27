@@ -6,7 +6,7 @@ import os
 from django.conf import settings
 
 from .filedb import FileDB
-from .jwt_utils import get_token_for_user, get_user_from_token
+from .jwt_utils import get_token_for_user
 
 # Initialize the file database
 DB_DIR = os.path.join(settings.BASE_DIR, 'data')

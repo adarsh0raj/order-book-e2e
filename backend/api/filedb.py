@@ -15,7 +15,7 @@ class FileDB:
         self.users_file = self.data_dir / 'users.json'
         self.orders_file = self.data_dir / 'orders.json'
         self.trades_file = self.data_dir / 'trades.json'
-        self.lock = threading.RLock()
+        self.lock = threading.RLock()         # Thread-safe lock for file operations
         
         # Initialize data directory and files if they don't exist
         self._initialize()
@@ -72,7 +72,7 @@ class FileDB:
                 return user
         return None
     
-    def create_user(self, username, password):
+    def create_user(self, username, hashed_password):
         """Create a new user"""
         users = self.get_users()
         
@@ -80,11 +80,10 @@ class FileDB:
         if any(user['username'] == username for user in users):
             return False
         
-        # Create new user
         new_user = {
             'id': len(users) + 1,
             'username': username,
-            'password': password  # In production, this would be hashed
+            'password': hashed_password  # Storing hashed password
         }
         
         users.append(new_user)

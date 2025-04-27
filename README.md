@@ -60,16 +60,16 @@ A simple yet powerful order book application for trading, built with a React fro
 ## API Endpoints
 
 - **Authentication**:
-  - POST `/api/auth/register/`: Register a new user
-  - POST `/api/auth/login/`: Login and receive JWT token
+  - POST `/api/auth/register/`: Register a new user and response will contain token and new user id and username
+  - POST `/api/auth/login/`: Login and receive JWT token and user id and username
 
 - **Order Book**:
-  - GET `/api/orderbook/`: Get the current order book
+  - GET `/api/orderbook/`: Get the current order book, all asks and all bids
   - GET `/api/orders/`: Get user's orders
-  - POST `/api/orders/`: Place a new order
+  - POST `/api/orders/`: Place a new order - bid or ask both supported in payload
 
 - **Trades**:
-  - GET `/api/trades/`: Get all executed trades
+  - GET `/api/trades/`: Get trade history by all users
 
 ## Features
 
@@ -88,21 +88,19 @@ A simple yet powerful order book application for trading, built with a React fro
 
 3. **Single Trading Pair**: The application currently only supports trading a single asset (referred to as "RELIANCE" in the UI).
 
-4. **In-Memory Order Matching**: Order matching occurs in memory when orders are placed, which could be a performance bottleneck for high-frequency trading scenarios.
+4. **In-Memory Order Matching**: Order matching occurs in memory when orders are placed.
 
 5. **No WebSockets**: The application relies on regular polling rather than real-time WebSocket connections for updates.
-
-6. **Simple Price-Time Priority**: Orders are matched based on price-time priority without additional considerations for advanced order types.
 
 ## Approach and Thought Process
 
 ### Backend Architecture
 
-1. **File-based Database**: Rather than using a traditional database, I implemented a custom file-based storage system (`FileDB` class) that reads and writes to JSON files. This simplified the setup while maintaining data persistence.
+1. **File-based Database**: Rather than using a traditional database, I implemented a custom file-based storage system (`FileDB` class) that reads and writes to JSON files. This simplified the setup while maintaining data persistence, and also this allowed to demostrate the full capabilities of the app without any external database connection or setup.
 
 2. **JWT Authentication**: I chose JWT for authentication because it's stateless and provides a good balance of security and simplicity. The token contains the user ID and username, allowing the system to identify users without additional database lookups.
 
-3. **Order Matching Engine**: The core of the application is the order matching engine implemented in `filedb.py`. When a new order is placed:
+3. **Order Matching Engine**: The order matching engine is implemented in `filedb.py`. When a new order is placed:
    - It first checks for matching orders in the opposite order book (bids for asks, asks for bids)
    - Orders are matched based on price-time priority
    - Partial fills are supported, leaving the remainder of an order active

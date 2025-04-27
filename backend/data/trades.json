@@ -78,5 +78,35 @@
     "bid_user": "adarsh",
     "ask_user_id": 2,
     "ask_user": "adarsh1"
+  },
+  {
+    "id": 9,
+    "price": 99.0,
+    "quantity": 35,
+    "timestamp": "2025-04-28T01:24:50.734867",
+    "bid_user_id": 4,
+    "bid_user": "adarsh2",
+    "ask_user_id": 2,
+    "ask_user": "adarsh1"
+  },
+  {
+    "id": 10,
+    "price": 101.5,
+    "quantity": 7,
+    "timestamp": "2025-04-28T01:27:28.793668",
+    "bid_user_id": 4,
+    "bid_user": "adarsh2",
+    "ask_user_id": 2,
+    "ask_user": "adarsh1"
+  },
+  {
+    "id": 11,
+    "price": 102.0,
+    "quantity": 7,
+    "timestamp": "2025-04-28T01:27:28.797671",
+    "bid_user_id": 4,
+    "bid_user": "adarsh2",
+    "ask_user_id": 2,
+    "ask_user": "adarsh1"
   }
 ]
